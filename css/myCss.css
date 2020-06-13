@@ -1,0 +1,21 @@
+#myCarousel {height: 850px;}
+#myCarousel .carousel-inner {overflow: visible; height: 850px;}
+.carousel-inner > .item > img {height: 850px;}
+.carousel-control {height: 850px;}
+#navbar {position: relative;}
+#myAccount {
+    position: absolute;
+    right:0px;
+}
+/*footer {*/
+/*    clear: both;*/
+/*    background-color: lightseagreen;*/
+/*    color: white;*/
+/*    line-height: 22px;*/
+/*    padding: 20px;*/
+/*    font-size: 12px;*/
+/*    vertical-align: bottom;*/
+/*    text-align: center;*/
+/*    position: fixed;*/
+/*    bottom: 0;*/
+/*}*/
