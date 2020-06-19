@@ -1,0 +1,240 @@
+.search-by-title {
+    border-radius: 6px;
+    border: lightseagreen solid 1px;
+    margin: 6% 0 10px 6%;
+}
+
+.search-input-button {
+    display: inline-flex;
+    /*margin: 10px 20px;*/
+}
+
+.search-input-button input[type="button"],
+.search-input-button input[type="submit"] {
+    /*padding: 0.5em;*/
+    text-align: center;
+    height: 100%;
+    color: lightseagreen;
+    background-color: transparent;
+    border-left: lightseagreen solid 1px;
+    border-radius: 0 0 6px 0;
+    width: 65px;
+    font-weight: bold;
+    box-shadow: none;
+    border-right: none;
+    border-bottom: none;
+    border-top: none;
+}
+
+input[type="button"],input[type="submit"],input[type="checkbox"], input[type="radio"], select:hover {
+    cursor: pointer;
+}
+
+.search-input-button input[type="search"]{
+    padding: 0.5em;
+    /*margin: 0.5em 0;*/
+    border: transparent solid 1px;
+    border-radius: 0 0 0 6px;
+    width: 185px;
+}
+
+.search-by-title, table {
+    width: 250px;
+    box-shadow: 0 0 10px lightgray;
+}
+
+.aside-left{
+    float: left;
+    width: 25%;
+}
+
+table th, table td, .search-title{
+    padding: 10px 30px;
+}
+
+table th, .search-title{
+    background-color: lightseagreen;
+    color: white;
+    border-radius: 6px 6px 0 0;
+    text-align: left;
+}
+
+table td:hover {
+    background-color: rgba(211, 211, 211, 0.38);
+}
+
+table {
+    border-collapse: unset;
+    margin: 10px 20px;
+    border: lightseagreen solid 1px;
+    border-radius: 6px;
+}
+
+table tr:last-child td {
+    border-radius: 0 0 6px 6px;
+}
+
+section {
+    float:right;
+    width: 75%;
+}
+
+#picArea {
+    float: right;
+    width: 75%;
+}
+
+.two-selectors select{
+    padding: 10px 20px;
+    border-radius: 6px;
+    border: lightseagreen solid 1px;
+    font-size: 16px;
+    box-shadow: 0 0 10px lightgray;
+    margin-right: 20px;
+    width: 150px;
+}
+
+.filter input {
+    margin: 20px 0;
+    padding: 10px;
+    border: lightseagreen solid 1px;
+    text-align: center;
+    width: 180px;
+    font-weight: bold;
+    background-image: linear-gradient(lightseagreen, #207c74);
+    color: white;
+    border-radius: 6px;
+}
+
+.filter input:active {
+    background-image: radial-gradient(#207c74, #1f5951);
+}
+
+.two-selectors {
+    display: inline-flex;
+    padding: 20px;
+}
+
+.rows::after {
+    content:"";
+    display: table;
+    clear: both;
+}
+
+.col {
+    float: left;
+    margin: 13px;
+    /*overflow: hidden;*/
+    /*box-shadow: 0 0 5px #888888;*/
+}
+
+/*.target {
+    padding-bottom:100%;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#target-1 {
+    background-image: url("../img/b (1).jpg");
+}
+
+#target-2 {
+    background-image: url("../img/b (2).jpg");
+}
+
+#target-3 {
+    background-image: url("../img/b (3).jpg");
+}
+
+#target-4 {
+    background-image: url("../img/b (4).jpg");
+}
+
+#target-5 {
+    background-image: url("../img/b (5).jpg");
+}
+
+#target-6 {
+    background-image: url("../img/b (6).jpg");
+}
+
+#target-7 {
+    background-image: url("../img/b (7).jpg");
+}
+
+#target-8 {
+    background-image: url("../img/b (8).jpg");
+}
+
+#target-9 {
+    background-image: url("../img/b (9).jpg");
+}
+
+#target-10 {
+    background-image: url("../img/b (10).jpg");
+}
+
+#target-11 {
+    background-image: url("../img/b (11).jpg");
+}
+
+#target-12 {
+    background-image: url("../img/b (12).jpg");
+}
+
+#target-13 {
+    background-image: url("../img/b (13).jpg");
+}
+
+#target-14 {
+    background-image: url("../img/b (14).jpg");
+}
+
+#target-15 {
+    background-image: url("../img/b (15).jpg");
+}
+
+#target-16 {
+    background-image: url("../img/b (16).jpg");
+}*/
+/*.col {
+    width: 22%;
+    height: 22%;
+}*/
+
+.pages {
+    clear:both;
+    width: 100%;
+}
+
+.pages .pages-list{
+    text-align: center;
+}
+
+.pages ul {
+    list-style: none;
+    display: inline-flex;
+}
+
+.pages li {
+    padding: 20px;
+}
+
+.pages a {
+    text-decoration: none;
+    color: lightseagreen;
+    cursor: pointer;
+}
+
+.pages a:hover {
+    color: #27d6ce;
+}
+
+.pages a.active-page {
+    color: #115b53;
+}
+
+footer {
+    clear: both;
+}

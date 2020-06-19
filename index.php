@@ -19,6 +19,7 @@
     <link href="bootstrap-3.3.7/docs/examples/carousel/carousel.css" rel="stylesheet">
     <link href="css/myCss.css" rel="stylesheet">
 </head>
+
 <!-- NAVBAR
 ================================================== -->
 <body>
@@ -40,16 +41,23 @@
                         <li class="active"><a href="#">首页</a></li>
                         <li><a href="#about">浏览</a></li>
                         <li><a href="#contact">搜索</a></li>
-                        <!--<li class="dropdown" id="myAccount">
-                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">个人中心<span class="caret"></span></a>
-                          <ul class="dropdown-menu">
-                            <li><a href="#">上传</a></li>
-                            <li><a href="#">我的照片</a></li>
-                            <li><a href="#">我的收藏</a></li>
-                            <li><a href="#">登出</a></li>
-                          </ul>
-                        </li>-->
-                        <li id="myAccount" class="dropdown"><a href="http://localhost:63342/Web%20Project%202/php/logIn.php">登录</a></li>
+                        <li id="myAccount" class="dropdown">
+                            <?php
+                            if (isset($_COOKIE['Username'])) {
+                                echo '<a href="#" class="dropdown-toggle" data-toggle="dropdown" 
+role="button" aria-haspopup="true" aria-expanded="false">个人中心 <span class="caret"></span></a>
+<ul class="dropdown-menu">
+                    <li><a href="#"><img src="img/upload.svg" alt="upload" width="20" height="20">上传</a></li>
+                    <li><a href="#"><img src="img/image.svg" alt="image" width="20" height="20">我的照片</a></li>
+                    <li><a href="#"><img src="img/like_filled.svg" alt="like" width="20" height="20">我的收藏</a></li>
+                    <li><a href="php/logout.php"><img src="img/user.svg" alt="logout" width="20" height="20">登出</a></li>
+                  </ul>';
+                            }
+                            else {
+                                echo '<a href="logIn.php">登录</a>';
+                            }
+                            ?>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -97,90 +105,130 @@
 <div class="container marketing">
 
     <!-- Three columns of text below the carousel -->
-    <div class="row">
-        <div class="col-lg-4">
-            <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
-            <h2>Heading</h2>
-            <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
+    <?php
+    require_once("config.php");
+    $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS);
+    $sql = "SELECT travelimagefavor.ImageID, Count(travelimagefavor.UID) AS NumFavor, travelimage.PATH, travelimage.Title, travelimage.Description  
+FROM travelimage JOIN travelimagefavor ON travelimagefavor.ImageID=travelimage.ImageID
+GROUP BY travelimagefavor.ImageID 
+ORDER BY NumFavor DESC";
+    $result = $pdo->query($sql);
+    $pictures = array();
+    $titles = array();
+    $descriptions = array();
+    for ($i = 0; $i < 12 && $row = $result->fetch(); $i++) {
+        array_push($pictures, $row['PATH']);
+        array_push($titles, $row['Title']);
+        array_push($descriptions, $row['Description']);
+    }
+    for ($i = 0; $i < 3; $i++) {
+        echo '<div class="row">';
+        for ($j = 0; $j < 3; $j++) {
+            $key = 3 * $i + $j;
+            echo '<div class="col-lg-4">
+            <img class="img-circle" src="img/travel-images/large/'.$pictures[$key].'" alt="Generic placeholder image" width="140" height="140" id="picture'.$key.'">
+            <h2 id="title'.$key.'">'.$titles[$key].'</h2>
+            <p class="index-description" id="description'.$key.'">'.$descriptions[$key].'</p>
             <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-        </div><!-- /.col-lg-4 -->
-        <div class="col-lg-4">
-            <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
-            <h2>Heading</h2>
-            <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>
-            <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-        </div><!-- /.col-lg-4 -->
-        <div class="col-lg-4">
-            <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
-            <h2>Heading</h2>
-            <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-            <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-        </div><!-- /.col-lg-4 -->
-    </div><!-- /.row -->
+        </div><!-- /.col-lg-4 -->';
+        }
+        echo '</div><!-- /.row -->';
+    }
+    ?>
 
-
-    <!-- START THE FEATURETTES -->
-
-    <hr class="featurette-divider">
-
-    <div class="row featurette">
-        <div class="col-md-7">
-            <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It'll blow your mind.</span></h2>
-            <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+    <div class="up-refresh">
+        <div class="up">
+            <a href="#">
+                <img src="img/up.svg" alt="up" width="30" height="30">
+            </a>
         </div>
-        <div class="col-md-5">
-            <img class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+        <div class="refresh">
+            <img src="img/refresh.svg" alt="refresh" width="30" height="30" id="refresh">
         </div>
     </div>
+    <?php
+    $rand = array();
+    function isUnique($n, $array) {
+        for ($i = 0; $i < $array->count(); $i++) {
+            if ($n === $array[$i]) {
+                return false;
+            }
+        }
+        return true;
+    }
 
-    <hr class="featurette-divider">
-
-    <div class="row featurette">
-        <div class="col-md-7 col-md-push-5">
-            <h2 class="featurette-heading">Oh yeah, it's that good. <span class="text-muted">See for yourself.</span></h2>
-            <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
-        </div>
-        <div class="col-md-5 col-md-pull-7">
-            <img class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
-        </div>
-    </div>
-
-    <hr class="featurette-divider">
-
-    <div class="row featurette">
-        <div class="col-md-7">
-            <h2 class="featurette-heading">And lastly, this one. <span class="text-muted">Checkmate.</span></h2>
-            <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
-        </div>
-        <div class="col-md-5">
-            <img class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
-        </div>
-    </div>
-
-    <hr class="featurette-divider">
-
-    <!-- /END THE FEATURETTES -->
-
+    function getRandNum($max, $array) {
+        if (isUnique($ranNum = rand(1, $max), $array)) {
+            array_push($array, $ranNum);
+            return $ranNum;
+        }
+        else {
+            getRandNum($max, $array);
+        }
+    }
+    $sql2 = "SELECT COUNT(*) AS Num FROM travelimage";
+    $result2 = $pdo->query($sql2);
+    $row2 = $result2->fetch();
+    ?>
 
     <!-- FOOTER -->
     <footer>
-        <p class="pull-right"><a href="#">Back to top</a></p>
+<!--        <p class="pull-right"><a href="#">Back to top</a></p>-->
         <p>&copy; 2016 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
     </footer>
 
 </div><!-- /.container -->
 
 
+
+
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
+<script>
+    console.log("hello");
+    let refresh = document.getElementById("refresh");
+    document.write("hello");
+    console.log("hello, "+refresh);
+    refresh.onclick = function () {
+        console.log('clicked');
+        <!--            --><?php
+        //echo '<h1>clicked'.getRandNum($row2['Num'], $rand).'</h1>';
+        //            ?>
+        for (let i = 0; i < 9; i++) {
+            let path =
+                <?php
+                //$sql3 = "SELECT * WHERE ImageID=" . getRandNum($row2['Num'], $rand);
+                $sql3 = "SELECT * WHERE ImageID=" . rand(1, 80);
+                $result3 = $pdo->query($sql3);
+                $row3 = $result3->fetch();
+                echo $row3['PATH'];
+                ?>;
+            let title =
+                <?php
+                echo $row3['Title'];
+                ?>;
+            let description =
+                <?php
+                echo $row3['Description'];
+                ?>;
+            document.getElementById("picture" + i).setAttribute("src", "img/travel-images/large/" + path);
+            document.getElementById("title" + i).innerHTML = title;
+            document.getElementById("description" + i).innerHTML = description;
+        }
+    }
+    //     $()
+</script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="bootstrap-3.3.7/docs/assets/js/vendor/jquery.min.js"></script>
 <script src="bootstrap-3.3.7/docs/dist/js/bootstrap.min.js"></script>
-<!-- Just to make our placeholder images work. Don't actually copy the next line! -->
-<script src="bootstrap-3.3.7/docs/assets/js/vendor/holder.min.js"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="bootstrap-3.3.7/docs/assets/js/ie10-viewport-bug-workaround.js"></script>
-<script src="js/log.js"></script>
+<script>
+    $(document).ready(function(){
+        $("#refresh").attr("src", "img/image.svg");
+    });
+</script>
+<script type="text/javascript" src="js/log.js"></script>
 </body>
 </html>

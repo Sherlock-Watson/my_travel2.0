@@ -35,6 +35,8 @@
     "twitter/bootstrap": "self.version"
   },
   "require": {
-    "ext-pdo": "*"
+    "ext-pdo": "*",
+    "ext-mysqli": "*",
+    "ext-json": "*"
   }
 }

@@ -3,10 +3,41 @@
 .carousel-inner > .item > img {height: 850px;}
 .carousel-control {height: 850px;}
 #navbar {position: relative;}
-#myAccount {
+#navbar > .nav > .myAccount {
     position: absolute;
-    right:0px;
+    right:0;
 }
+.row > .col-lg-4 > p.index-description {
+    /*text-align: left;*/
+    font-size: 12px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    /*background: goldenrod;*/
+    white-space: nowrap;
+}
+.up-refresh {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+}
+
+.up-refresh div {
+    margin-bottom: 20px;
+}
+.up, .refresh {
+    cursor: pointer;
+}
+
+h5 {
+    margin: 0;
+    font-weight: bold;
+}
+input[type] {
+    border: none;
+}
+/*.navbar-fixed-top {*/
+/*    position: static;*/
+/*}*/
 /*footer {*/
 /*    clear: both;*/
 /*    background-color: lightseagreen;*/
