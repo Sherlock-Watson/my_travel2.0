@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ch">
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>搜索</title>
+    <title>我的照片</title>
 
     <link href="css/reset.css" rel="stylesheet">
 
@@ -43,7 +43,7 @@
             <ul class="nav navbar-nav">
                 <li><a href="index.html">首页</a></li>
                 <li><a href="browser.html">浏览</a></li>
-                <li class="active"><a href="#">搜索</a></li>
+                <li><a href="search.html">搜索</a></li>
                 <li class="dropdown myAccount">
 
                 </li>
@@ -52,31 +52,7 @@
     </div>
 </nav>
 
-<div class="search-part">
-    <div class="title"><h5>搜索</h5></div>
-    <hr>
-    <form>
-        <div class="filter-by-title">
-            <div class="filter-by-title-radio">
-                    <input type="radio" checked name="filter-by-title-or-description" value="0" class="filter-by-title-or-description">
-                <span>按照标题搜索</span>
-            </div>
-                <input type="search" id="searchTitle">
-        </div>
-        <div class="filter-by-description">
-            <div class="filter-by-description-radio">
-                    <input type="radio" name="filter-by-title-or-description" value="1" class="filter-by-title-or-description">
-                <span>按照描述搜索</span>
-            </div>
-                <textarea name="description" id="description"></textarea>
-        </div>
-        <div class="filter">
-            <input type="button" value="搜索" id="btnSearch">
-        </div>
-    </form>
-</div>
-
-<div class="result-part" id="resultPart">
+<div class="contents" id="resultPart">
 </div>
 
 <div class="pages">
@@ -91,6 +67,6 @@
 <script src="bootstrap-3.3.7/docs/dist/js/bootstrap.min.js"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="bootstrap-3.3.7/docs/assets/js/ie10-viewport-bug-workaround.js"></script>
-<script src="js/search.js"></script>
+<script src="js/myPhoto.js"></script>
 </body>
 </html>

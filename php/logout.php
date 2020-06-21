@@ -1,4 +1,4 @@
 <?php
 setcookie("Username", "", -1);
-header("Location: ../logIn.php");
-?>
+setcookie("UID", "", -1);
+header("Location: ../logIn.html");

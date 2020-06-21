@@ -1,6 +1,6 @@
 .search-by-title {
     border-radius: 6px;
-    border: lightseagreen solid 1px;
+    border: lightgrey solid 1px;
     margin: 6% 0 10px 6%;
 }
 
@@ -14,9 +14,9 @@
     /*padding: 0.5em;*/
     text-align: center;
     height: 100%;
-    color: lightseagreen;
+    color: dimgray;
     background-color: transparent;
-    border-left: lightseagreen solid 1px;
+    border-left: lightgrey solid 1px;
     border-radius: 0 0 6px 0;
     width: 65px;
     font-weight: bold;
@@ -53,20 +53,29 @@ table th, table td, .search-title{
 }
 
 table th, .search-title{
-    background-color: lightseagreen;
-    color: white;
+    background-color: lightgrey;
+    color: black;
     border-radius: 6px 6px 0 0;
     text-align: left;
+    font-weight: 100;
+}
+
+.search-title h5 {
+    font-weight: 100;
 }
 
 table td:hover {
     background-color: rgba(211, 211, 211, 0.38);
 }
 
+table td {
+    cursor: pointer;
+}
+
 table {
     border-collapse: unset;
     margin: 10px 20px;
-    border: lightseagreen solid 1px;
+    border: lightgrey solid 1px;
     border-radius: 6px;
 }
 
@@ -75,7 +84,7 @@ table tr:last-child td {
 }
 
 section {
-    float:right;
+    float: right;
     width: 75%;
 }
 
@@ -87,7 +96,7 @@ section {
 .two-selectors select{
     padding: 10px 20px;
     border-radius: 6px;
-    border: lightseagreen solid 1px;
+    border: lightgrey solid 1px;
     font-size: 16px;
     box-shadow: 0 0 10px lightgray;
     margin-right: 20px;
@@ -97,17 +106,17 @@ section {
 .filter input {
     margin: 20px 0;
     padding: 10px;
-    border: lightseagreen solid 1px;
+    border: deepskyblue solid 1px;
     text-align: center;
     width: 180px;
     font-weight: bold;
-    background-image: linear-gradient(lightseagreen, #207c74);
+    background-image: linear-gradient(deepskyblue 0%, #007ea8 100%);
     color: white;
     border-radius: 6px;
 }
 
 .filter input:active {
-    background-image: radial-gradient(#207c74, #1f5951);
+    background-image: radial-gradient(#007ea8 , #006f9a);
 }
 
 .two-selectors {

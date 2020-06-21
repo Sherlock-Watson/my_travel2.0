@@ -28,26 +28,22 @@ function validLogin(){
     }
     return array(false, 0);
 }
-//$logIn = false;
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $valid = validLogin()[0];
     $uid = validLogin()[1];
-    echo '<h1>'.$uid.'</h1>';
     if($valid){
         // add 1 day to the current time for expiry time
         $expiryTime = time()+60*60*24;
         setcookie("Username", $_POST['userName'], $expiryTime);
+        setcookie("UID", $uid, $expiryTime);
     }
 }
 else {
     $uid = null;
 }
 if (!isset($_COOKIE['Username'])){
-    header('Location:'.$_SERVER['HTTP_REFERER']);
+    echo false;
 }
 else{
-    echo '<h1>'.$uid.'</h1>';
-    $url = "Location:../index.html?logIn=".$uid;
-    echo '<h1>'.$url.'</h1>';
-    header($url);
+    echo $uid;
 }

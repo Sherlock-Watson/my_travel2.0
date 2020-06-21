@@ -5,7 +5,6 @@ $(document).ready(function() {
         async: false,
         success: function (data) {
             $('.myAccount').html(data);
-
         }
     });
     $.ajax({

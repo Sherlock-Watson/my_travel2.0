@@ -1,9 +1,7 @@
 <?php
 require_once("config.php");
-$validPass = false;
 function validRegister() {
-    $validPass = $_POST['password'] === $_POST['rePassword'];
-    if ($validPass) {
+    if (validUseName($_POST['userName'])) {
         $pdo = new PDO(DBCONNSTRING, DBUSER, DBPASS);
         //very simple (and insecure) check of valid credentials.
         $sql = "INSERT INTO traveluser (UserName, Pass, Email, State, DateJoined, DateLastModified)
@@ -21,15 +19,36 @@ VALUES (:username, :pass, :email, 1, :dateJoined, :dateLastModified)";
     }
     return false;
 }
+
+function validUseName($userName) {
+    $pdo = new PDO(DBCONNSTRING, DBUSER, DBPASS);
+    $sql = "SELECT UserName FROM traveluser WHERE UserName=:userName";
+    $statement = $pdo->prepare($sql);
+    $statement->bindValue(':userName', $userName);
+    $statement->execute();
+    return !($statement->rowCount() > 0);
+}
+$strValidUserName = false;
 $register = false;
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (validRegister()) {
+        $strValidUserName = true;
         $register = true;
     }
+    else {
+        $strValidUserName = validUseName($_POST['userName']);
+    }
 }
-if (!$register){
-    header('Location:'.$_SERVER['HTTP_REFERER']);
+if ($strValidUserName) {
+    $strValidUserName = 'true';
 }
-else{
-    header('Location: logIn.php');
+else {
+    $strValidUserName = 'false';
 }
+if ($register) {
+    $register = 'true';
+}
+else {
+    $register = 'false';
+}
+echo '{"validUserName":'.$strValidUserName.',"validRegister":'.$register.'}';

@@ -9,12 +9,14 @@ $result = $pdo->query($sql);
 $pictures = array();
 $titles = array();
 $descriptions = array();
+$ids = array();
 for ($i = 0; $i < 9 && $row = $result->fetch(); $i++) {
     array_push($pictures, $row['PATH']);
     array_push($titles, $row['Title']);
     array_push($descriptions, $row['Description']);
+    array_push($ids, $row['ImageID']);
 }
-function changePics($pictures, $titles, $descriptions)
+function changePics($pictures, $titles, $descriptions, $ids)
 {
     for ($i = 0; $i < 3; $i++) {
         echo '<div class="row">';
@@ -24,11 +26,11 @@ function changePics($pictures, $titles, $descriptions)
             <img class="img-circle" src="img/travel-images/large/' . $pictures[$key] . '" alt="Generic placeholder image" width="140" height="140" id="picture' . $key . '">
             <h2 id="title' . $key . '">' . $titles[$key] . '</h2>
             <p class="index-description" id="description' . $key . '">' . $descriptions[$key] . '</p>
-            <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+            <p><a class="btn btn-default" href="detail.html?ImageID='.$ids[$key].'" role="button">View details &raquo;</a></p>
         </div><!-- /.col-lg-4 -->';
         }
         echo '</div><!-- /.row -->';
     }
 }
-changePics($pictures, $titles, $descriptions);
+changePics($pictures, $titles, $descriptions, $ids);
 $pdo = null;

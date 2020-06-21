@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>搜索</title>
+    <title>上传</title>
 
     <link href="css/reset.css" rel="stylesheet">
 
@@ -19,7 +19,7 @@
 
     <!-- Custom styles for this template -->
     <link href="bootstrap-3.3.7/docs/examples/theme/theme.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/Search.css" media="all">
+    <link rel="stylesheet" type="text/css" href="css/Upload.css" media="all">
     <link href="css/myCss.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -27,7 +27,6 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-</head>
 <body>
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
@@ -43,7 +42,7 @@
             <ul class="nav navbar-nav">
                 <li><a href="index.html">首页</a></li>
                 <li><a href="browser.html">浏览</a></li>
-                <li class="active"><a href="#">搜索</a></li>
+                <li><a href="search.html">搜索</a></li>
                 <li class="dropdown myAccount">
 
                 </li>
@@ -51,37 +50,64 @@
         </div><!--/.nav-collapse -->
     </div>
 </nav>
-
-<div class="search-part">
-    <div class="title"><h5>搜索</h5></div>
+<div class="contents">
+    <!--内容部分-->
+    <div class="upload-title">上传</div>
     <hr>
-    <form>
-        <div class="filter-by-title">
-            <div class="filter-by-title-radio">
-                    <input type="radio" checked name="filter-by-title-or-description" value="0" class="filter-by-title-or-description">
-                <span>按照标题搜索</span>
-            </div>
-                <input type="search" id="searchTitle">
+    <form name="upload" id="upload">
+        <div class="frame"><img src="img/pre-upload4.jpg" id="img0" alt="图片未上传"></div>
+        <div class="preview">
+            <label for="file0">
+                <input type="file" accept="image/*"
+                       name="file0" id="file0" multiple>
+            </label>
+            <div class="bt-upload"><input type="button" value="上传"></div>
         </div>
-        <div class="filter-by-description">
-            <div class="filter-by-description-radio">
-                    <input type="radio" name="filter-by-title-or-description" value="1" class="filter-by-title-or-description">
-                <span>按照描述搜索</span>
-            </div>
-                <textarea name="description" id="description"></textarea>
-        </div>
-        <div class="filter">
-            <input type="button" value="搜索" id="btnSearch">
-        </div>
+        <hr>
+        <p>
+            <label for="ImageID"></label>
+            <input type="hidden" id="imageID" name="imageID">
+        </p>
+        <p>
+
+            <label for="title">图片标题：<br></label>
+                <input type="text" id="title" name="title">
+
+        </p>
+        <p id="errorMessageArea" class="alert alert-danger"></p>
+        <p>
+            <label for="description">图片描述：<br></label>
+                <textarea id="description" name="description"></textarea>
+
+        </p>
+        <p id="errorMessageArea1" class="alert alert-danger"></p>
+        <p>
+
+            <label for="country">拍摄国家：<select name="country" id="country"></select></label>
+            <label for="city">拍摄城市：
+                <select name="city" id="city">
+                    <option value="default">--请选择--</option>
+                </select>
+            </label>
+            <label for="content">主题：
+                <select name="content" id="content">
+                    <option value="default">--请选择--</option>
+                    <option>scenery</option>
+                    <option>City</option>
+                    <option>People</option>
+                    <option>Animal</option>
+                    <option>Building</option>
+                    <option>Wonder</option>
+                    <option>Other</option>
+                </select>
+            </label>
+        </p>
+        <p id="errorMessageArea2" class="alert alert-danger"></p>
+
+            <input type="button" value="提交" id="btnUpload">
     </form>
+    <script type="text/javascript" src="js/upload.js"></script>
 </div>
-
-<div class="result-part" id="resultPart">
-</div>
-
-<div class="pages">
-</div>
-
 <footer class="footer">
     Copyright &copy; 2019-2021 May the force be with you. All Rights Reserved. 备案号浙FORCE备19930号-9
 </footer>
@@ -91,6 +117,6 @@
 <script src="bootstrap-3.3.7/docs/dist/js/bootstrap.min.js"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="bootstrap-3.3.7/docs/assets/js/ie10-viewport-bug-workaround.js"></script>
-<script src="js/search.js"></script>
+<script src="js/upload.js"></script>
 </body>
 </html>

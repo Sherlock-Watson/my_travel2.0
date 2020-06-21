@@ -4,6 +4,7 @@ $(document).ready(function() {
     let rowSize = 4;
     let totalCount;
     let totalPage;
+    let hot;
 
     $.ajax({
         type: 'POST',
@@ -13,6 +14,19 @@ $(document).ready(function() {
             $('.myAccount').html(data);
         }
     });
+
+    $.ajax({
+        type: 'POST',
+        url: 'php/hot.php',
+        async: false,
+        success: function (data) {
+            hot = JSON.parse(data);
+        }
+    });
+
+    fillHot(hot.hotCountry, 'country');
+    fillHot(hot.hotCity, 'city');
+    fillHot(hot.Content, 'hot-content-content');
 
     $('#search').click(function () {
         let searchContent = $('#search-area').val();
@@ -27,7 +41,7 @@ $(document).ready(function() {
                 success: function (data) {
                     searchResults = JSON.parse(data).results;
                     totalCount = searchResults.length;
-                    totalPage = Math.ceil(totalCount / pageSize);
+                    totalPage = (Math.ceil(totalCount / pageSize) > 5)?5:Math.ceil(totalCount / pageSize);
                     $('#picArea').html(showPage(searchResults, 1));
                     $('.pages').html(showPageNumber(totalPage));
                     $('.page1').addClass('active-page');
@@ -60,8 +74,6 @@ $(document).ready(function() {
         let filterResults;
         let content = $('#contents').val();
         let city = $('#city').val();
-        console.log(content);
-        console.log(city);
         if (content === 'default' || city === 'default') {
             $('#picArea').html('<h1>还没选呢不能筛选！</h1>');
         }
@@ -75,7 +87,7 @@ $(document).ready(function() {
                 success: function (data) {
                     filterResults = JSON.parse(data).results;
                     totalCount = filterResults.length;
-                    totalPage = Math.ceil(totalCount / pageSize);
+                    totalPage = (Math.ceil(totalCount / pageSize) > 5)?5:Math.ceil(totalCount / pageSize);
                     $('#picArea').html(showPage(filterResults,1));
                     $('.pages').html(showPageNumber(totalPage));
                     $('.page1').addClass('active-page');
@@ -99,7 +111,7 @@ $(document).ready(function() {
                 success: function (data) {
                     searchResults = JSON.parse(data).results;
                     totalCount = searchResults.length;
-                    totalPage = Math.ceil(totalCount / pageSize);
+                    totalPage = (Math.ceil(totalCount / pageSize) > 5)?5:Math.ceil(totalCount / pageSize);
                     $('#picArea').html(showPage(searchResults, 1));
                     $('.pages').html(showPageNumber(totalPage));
                     $('.page1').addClass('active-page');
@@ -119,7 +131,7 @@ $(document).ready(function() {
                 success: function (data) {
                     searchResults = JSON.parse(data).results;
                     totalCount = searchResults.length;
-                    totalPage = Math.ceil(totalCount / pageSize);
+                    totalPage = (Math.ceil(totalCount / pageSize) > 5)?5:Math.ceil(totalCount / pageSize);
                     $('#picArea').html(showPage(searchResults, 1));
                     $('.pages').html(showPageNumber(totalPage));
                     $('.page1').addClass('active-page');
@@ -129,8 +141,8 @@ $(document).ready(function() {
         });
     }
 
-    $('.hot-content-content').click(function () {
-        let content = $('.hot-content-content').html();
+    $('.hot-content-content0').click(function () {
+        let content = $('.hot-content-content0').html();
         let searchResults;
         $.ajax({
             type: 'POST',
@@ -139,10 +151,10 @@ $(document).ready(function() {
             data: {"Content": content},
             data_type: 'json',
             success: function (data) {
-                console.log(data.substr(8110, 20));
+                console.log(data.substr(8200, 200));
                 searchResults = JSON.parse(data).results;
                 totalCount = searchResults.length;
-                totalPage = Math.ceil(totalCount / pageSize);
+                totalPage = (Math.ceil(totalCount / pageSize) > 5)?5:Math.ceil(totalCount / pageSize);
                 $('#picArea').html(showPage(searchResults, 1));
                 $('.pages').html(showPageNumber(totalPage));
                 $('.page1').addClass('active-page');
@@ -150,6 +162,12 @@ $(document).ready(function() {
         });
         turnPage(searchResults, totalPage);
     });
+
+    function fillHot(contents, className) {
+        for (let i = 0; i < contents.length; i++) {
+            $('.'+className+i).empty().html(contents[i]);
+        }
+    }
 
     function showPage(res, currentPage) {
         let totalCount = res.length;
@@ -165,7 +183,7 @@ $(document).ready(function() {
                 for (let j = 0; j < rowSize; j++) {
                     let key = rowPerPage * i + j + mark;
                     str += '<div class="col">\n' +
-                        '<a class="col-link" href="">\n' +
+                        '<a class="col-link" href="detail.html?ImageID=' + res[key].ImageID + '">\n' +
                         '<img data-src="holder.js/200x200" class="img-thumbnail" alt="200x200"\n' +
                         'style="width: 200px; height: 200px;" src="img/travel-images/large/' + res[key].PATH + '" data-holder-rendered="true">\n' +
                         '</a>\n' +
@@ -183,7 +201,7 @@ $(document).ready(function() {
                     for (let j = 0; j < elementThisRow; j++) {
                         let key = rowPerPage * i + j + mark;
                         str += '<div class="col">\n' +
-                            '<a class="col-link" href="">\n' +
+                            '<a class="col-link" href="detail.html?ImageID=' + res[key].ImageID + '">' +
                             '<img data-src="holder.js/200x200" class="img-thumbnail" alt="200x200"\n' +
                             'style="width: 200px; height: 200px;" src="img/travel-images/large/' + res[key].PATH + '" data-holder-rendered="true">\n' +
                             '</a>\n' +
@@ -196,7 +214,7 @@ $(document).ready(function() {
                 for (let i = 0; i < left; i++) {
                     let key = i + mark;
                     str += '<div class="col">\n' +
-                        '<a class="col-link" href="">\n' +
+                        '<a class="col-link" href="detail.html?ImageID=' + res[key].ImageID + '">\n' +
                         '<img data-src="holder.js/200x200" class="img-thumbnail" alt="200x200"\n' +
                         'style="width: 200px; height: 200px;" src="img/travel-images/large/' + res[key].PATH + '" data-holder-rendered="true">\n' +
                         '</a>\n' +
